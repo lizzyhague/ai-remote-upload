@@ -1,0 +1,20 @@
+{
+  "name": "ai-remote-upload",
+  "version": "0.1.0",
+  "description": "Local shared upload service for AI Remote backends.",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node src/main.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"src/**/*.test.ts\""
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "typescript": "7.0.2"
+  }
+}
