@@ -230,3 +230,29 @@ async function uploadFile(
 async function* chunks(value: string): AsyncIterable<Uint8Array> {
   yield Buffer.from(value);
 }
+
+test("accepts lanting as a caller and keeps its binding separate", async (context) => {
+  const { paths, client } = await fixture(context);
+  const text = Buffer.from("notes");
+  const sourcePath = path.join(paths.root, "notes.txt");
+  await writeFile(sourcePath, text);
+  const binding = { caller: "lanting", projectId: "lanting/demo", sessionId: "group-1" } as const;
+  const ticket = await client.createTicket({
+    ...binding,
+    originalName: "notes.txt",
+    declaredMime: "text/plain",
+    expectedSize: text.byteLength,
+  });
+  const attachment = await uploadFile(client, ticket.ticket, sourcePath, text.byteLength);
+  assert.equal(attachment.caller, "lanting");
+  await assert.rejects(
+    client.createLease({ ...binding, caller: "claude" }, "round-1", [attachment.id]),
+  );
+  const lease = await client.createLease(binding, "round-1", [attachment.id]);
+  assert.deepEqual(await readFile(lease.attachments[0]!.path), text);
+  await client.releaseLease(lease.leaseId, "round-1");
+  await assert.rejects(
+    client.createTicket({ ...binding, caller: "other" as "lanting", originalName: "x", declaredMime: "", expectedSize: 1 }),
+    /调用方无法识别/u,
+  );
+});

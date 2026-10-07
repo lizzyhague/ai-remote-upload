@@ -26,6 +26,7 @@ import {
   type AttachmentLease,
   type PublicAttachment,
   type ResolvedAttachment,
+  isSharedUploadCaller,
   SharedUploadError,
   type SharedUploadCaller,
   type UploadTicket,
@@ -627,7 +628,7 @@ function requireIdentifier(value: string, label: string): void {
 }
 
 function requireCaller(value: unknown): SharedUploadCaller {
-  if (value === "codex" || value === "grok" || value === "claude") return value;
+  if (isSharedUploadCaller(value)) return value;
   throw new SharedUploadError("invalid_caller", "上传调用方无法识别。");
 }
 

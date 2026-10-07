@@ -1,4 +1,4 @@
-export const SHARED_UPLOAD_CALLERS = ["codex", "grok", "claude"] as const;
+export const SHARED_UPLOAD_CALLERS = ["codex", "grok", "claude", "lanting"] as const;
 
 export type SharedUploadCaller = typeof SHARED_UPLOAD_CALLERS[number];
 

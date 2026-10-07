@@ -13,7 +13,7 @@ JSON 错误统一为：
 }
 ```
 
-`caller` 只能是 `codex`、`grok` 或 `claude`。调用方由 Remote 后端填写，不能相信浏览器传来的 caller、项目、会话或服务器路径。
+`caller` 只能是 `codex`、`grok`、`claude` 或 `lanting`。调用方由 Remote 后端填写，不能相信浏览器传来的 caller、项目、会话或服务器路径。
 
 ## 健康检查
 

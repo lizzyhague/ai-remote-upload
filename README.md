@@ -1,6 +1,6 @@
 # AI Remote Upload
 
-本机共享上传服务。给 Codex Remote、Grok Remote、Relayu 这类单用户 Remote 存附件、发票据、管租约。
+本机共享上传服务。给 Codex Remote、Grok Remote、Relayu、lanting 这类单用户 Remote 存附件、发票据、管租约。
 
 它是独立进程：不启动模型，不连接浏览器，不读项目白名单，也不持有会话 Worker。调用方先完成自己的登录、Origin、项目和会话校验，再通过本机 Unix socket HTTP 声明绑定信息。
 

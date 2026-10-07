@@ -41,7 +41,8 @@ chmod 600 deploy/ai-remote-upload.env
 ```text
 codex-remote ──┐
 grok-remote ──┼── Unix socket HTTP ── 本实例
-relayu ───────┘
+relayu ───────┤
+lanting ──────┘
 ```
 
 ### 不同账号各自一个实例
